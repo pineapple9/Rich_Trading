@@ -1,0 +1,4 @@
+# Streamlit 1.66 loads this script-scoped file after the root configuration.
+# This entrypoint exposes only session-isolated demo data.
+[server]
+address = "0.0.0.0"
