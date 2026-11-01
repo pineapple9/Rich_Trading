@@ -29,7 +29,9 @@ DEFAULTS = {
 
 
 def baht(value):
-    return f"฿{value:,.2f}"
+    # Streamlit determines delta direction from the leading sign. Keeping the
+    # minus before the currency symbol makes portfolio losses red/downward.
+    return f"{'-' if value < 0 else ''}฿{abs(value):,.2f}"
 
 
 def records_frame(records):

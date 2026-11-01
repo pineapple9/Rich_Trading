@@ -69,6 +69,8 @@ def test_plan_buy_close_and_ledger_isolation(ui):
     assert opened.cash < Decimal("2000")
     assert store.snapshot("real").cash == Decimal("2000")
     navigate(app, "พอร์ตจำลอง")
+    assert opened.equity < Decimal("2000")  # entry slippage is an immediate loss
+    assert app.metric[0].delta.startswith("-")  # Streamlit must display a loss as down/red
     next(button for button in app.button if button.label == "บันทึกขายจำลอง").click().run()
     assert not app.exception
     closed = store.snapshot("paper", as_of=as_of)
